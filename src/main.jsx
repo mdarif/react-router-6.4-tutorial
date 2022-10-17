@@ -3,14 +3,12 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 import ErrorPage from './error-page';
 import './index.css';
-import Contact from './routes/contact';
+import Contact, { loader as contactLoader } from './routes/contact';
 import Root, {
   loader as rootLoader,
   action as rootAction,
-  loader as contactLoader,
-  action as editAction,
 } from './routes/root';
-import EditContact from './routes/edit';
+import EditContact, { action as editAction } from './routes/edit';
 
 // create a Browser Router and configure our first route
 const router = createBrowserRouter([
