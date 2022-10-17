@@ -10,6 +10,7 @@ import Root, {
 } from './routes/root';
 import EditContact, { action as editAction } from './routes/edit';
 import { action as destroyAction } from './routes/destroy';
+import Index from './routes';
 
 // create a Browser Router and configure our first route
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
     loader: rootLoader,
     action: rootAction,
     children: [
+      {
+        index: true,
+        element: <Index />,
+      },
       {
         path: 'contacts/:contactId',
         element: <Contact />,
