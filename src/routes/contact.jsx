@@ -1,6 +1,15 @@
 import { Form, useLoaderData, useFetcher } from 'react-router-dom';
 import { getContact, updateContact } from '../contacts';
 
+/**
+ * loader()
+ *
+ * Each route can define a "loader" function to provide data to the route element
+ * before it renders.
+ *
+ * IMP: This feature only works if using a data router, like createBrowserRouter.
+ */
+
 export async function loader({ params }) {
   const contact = await getContact(params.contactId);
   if (!contact) {

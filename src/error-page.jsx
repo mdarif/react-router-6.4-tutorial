@@ -8,7 +8,7 @@ export default function ErrorPage() {
    * thrown during an action, loader, or rendering.
    */
   const error = useRouteError();
-  console.log(error);
+
   return (
     <div id='error-page'>
       <h1>Oops!</h1>

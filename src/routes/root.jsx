@@ -10,6 +10,13 @@ import {
 } from 'react-router-dom';
 import { getContacts, createContact } from '../contacts';
 
+/**
+ * action()
+ *
+ * Route actions are the "writes" to route loader "reads".
+ * They are called after the loader has resolved and the route element has rendered.
+ */
+
 export async function action() {
   const contact = await createContact();
   return redirect(`/contacts/${contact.id}/edit`);
@@ -17,8 +24,38 @@ export async function action() {
 
 // Create the root layout component
 export default function Root() {
+  /**
+   * useLoaderData
+   *
+   * This hook provides the value returned from your route 'loader'.
+   */
+
   const { contacts, q } = useLoaderData();
+
+  /**
+   * useNavigation
+   *
+   * This hook tells you everything you need to know about a page navigation to
+   * build pending navigation indicators and optimistic UI on data mutations. Things like:
+   *
+   * 1. Global loading indicators
+   * 2. Disabling forms while a mutation is happening
+   * 3. Adding busy indicators to submit buttons
+   * 4. Optimistically showing a new record while it's being created on the server
+   * 5. Optimistically showing the new state of a record while it's being updated
+   *
+   * [IMP]: This feature only works if using a data router, like createBrowserRouter.
+   */
   const navigation = useNavigation();
+
+  /**
+   * useSubmit
+   *
+   * The imperative version of <Form> that let's you, the programmer,
+   * submit a form instead of the user.
+   *
+   * [IMP]: This feature only works if using a data router, like createBrowserRouter.
+   */
   const submit = useSubmit();
 
   const searching =
@@ -100,6 +137,24 @@ export default function Root() {
     </>
   );
 }
+
+/**
+ * <Outlet>
+ *
+ * An <Outlet> should be used in parent route elements to render their child
+ * route elements. This allows nested UI to show up when child routes are rendered.
+ * If the parent route matched exactly, it will render a child index route or
+ * nothing if there is no index route.
+ */
+
+/**
+ * loader
+ *
+ * Each route can define a "loader" function to provide data to the route element
+ * before it renders.
+ *
+ * [IMP]: This feature only works if using a data router, like createBrowserRouter.
+ */
 
 export async function loader({ request }) {
   const url = new URL(request.url);
